@@ -1,0 +1,14 @@
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\MainWindow.g.cs
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\App.g.cs
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT_MarkupCompile.cache
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT_MarkupCompile.lref
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\CHATTING_CLIENT.exe.config
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\CHATTING_CLIENT.exe
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\CHATTING_CLIENT.pdb
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\MainWindow.baml
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.g.resources
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.Properties.Resources.resources
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.csproj.GenerateResource.cache
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.exe
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.pdb
+C:\Users\qkrdy\source\repos\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.csprojAssemblyReference.cache
