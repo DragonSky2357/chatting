@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CHATTING_CLIENT"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="400" WindowStyle="None" AllowsTransparency="True" MouseLeftButtonDown="ScreenMove" Foreground="{x:Null}">
+        mc:Ignorable="d" Height="600" Width="400" WindowStyle="None" AllowsTransparency="True" MouseLeftButtonDown="ScreenMove" Foreground="{x:Null}" Loaded="Window_Loaded" Title="Chatting">
     <Grid>
         <Grid>
             <Image HorizontalAlignment="Left" Height="20" Margin="310,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Minimize Window.png" MouseLeftButtonDown="Minimize_Window"/>
@@ -17,7 +16,7 @@
         </Grid>
         <Grid>
             <TextBox x:Name="SendDataText" HorizontalAlignment="Left" Height="95" Margin="0,505,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" FontSize="14" BorderBrush="White" SelectionBrush="White" SelectionOpacity="1" KeyDown="SendDataText_KeyDown"/>
-            <Button x:Name="SendButton" IsEnabled="False" HorizontalAlignment="Left" Height="30" Width="60" Margin="330,520,0,50" Content="전송" Background="Yellow" VerticalAlignment="Top" RenderTransformOrigin="1.833,-2.667" MouseLeftButtonDown="SendButtonClick" BorderBrush="#FFF0F052" Click="Button_Click"/>
+            <Button x:Name="SendButton" IsEnabled="False" HorizontalAlignment="Left" Height="30" Width="60" Margin="330,520,0,50" Content="전송" Background="Yellow" VerticalAlignment="Top" RenderTransformOrigin="1.833,-2.667"  BorderBrush="#FFF0F052" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -35,7 +35,7 @@ namespace CHATTING_CLIENT {
             get { return 13000; }
         }
         //다른 PC에 연결하려면 아래코드 실행
-        //public static string IPAddress = "110.12.152.91";
+        //public static string IPAddress = "IPAddress";
         //public static int PORT = 13000;
     }
     public partial class MainWindow : Window {
@@ -45,7 +45,10 @@ namespace CHATTING_CLIENT {
 
         public MainWindow() {
             InitializeComponent();
+            StartChatting();
+        }
 
+        private void StartChatting() {
             clientSocket.Connect(IP.IPAddress, IP.Port);
             stream = clientSocket.GetStream();
 
@@ -56,9 +59,9 @@ namespace CHATTING_CLIENT {
             Thread t_handler = new Thread(GetMessage);
             t_handler.IsBackground = true;
             t_handler.Start();
-
         }
 
+        // 기본적인 수신메소드
         private void GetMessage() {
             while (true) {
                 stream = clientSocket.GetStream();
@@ -71,54 +74,42 @@ namespace CHATTING_CLIENT {
 
             }
         }
+
+        // user에 따라 글자색이 변경된다. user가 자신이면 검정색 다른사람이면 파랑색
+        private void SetColor(string message,bool user) {
+            BrushConverter bc = new BrushConverter();
+            TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
+            tr.Text = message;
+            tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(user==true? Colors.Blue:Colors.Black));
+
+            ContentOfTalk.AppendText(Environment.NewLine);
+            ContentOfTalk.ScrollToEnd();
+        }
+        // user와 UI쓰레드(flag) 접근권한에따라 분배 
+        private void SetWordColor (string message,bool user, bool flag) {
+            if(user==true && flag == true) {
+                SetColor(message,user);
+            }else if(user == true && flag == false) {
+                ContentOfTalk.Dispatcher.BeginInvoke(new Action(delegate {
+                    SetColor(message,user);
+                }));
+            }else if(user==false && flag == true) {
+                SetColor(message,user);
+            } else {
+                ContentOfTalk.Dispatcher.BeginInvoke(new Action(delegate {
+                    SetColor(message,user);
+                }));
+            }
+        }
+        // 메시지를 출력하기 위해 UI쓰레드 or Work쓰레드따라 SetWordColor함수 호출
         private void DisPlayText(string message, bool flag) {
             if (flag == true) {
-                if (ContentOfTalk.Dispatcher.CheckAccess()) {
-                    BrushConverter bc = new BrushConverter();
-                    TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
-                    tr.Text = message;
-
-                    tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(Colors.Black));
-
-                    ContentOfTalk.AppendText(Environment.NewLine);
-                    ContentOfTalk.ScrollToEnd();
-                } else {
-                    ContentOfTalk.Dispatcher.BeginInvoke(new Action(delegate {
-                        BrushConverter bc = new BrushConverter();
-                        TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
-                        tr.Text = message;
-
-                        tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(Colors.Black));
-
-                        ContentOfTalk.AppendText(Environment.NewLine);
-                        ContentOfTalk.ScrollToEnd();
-                    }));
-                }
+                if (ContentOfTalk.Dispatcher.CheckAccess()) SetWordColor(message,true, true);
+                else SetWordColor(message,true, false);
             } 
             else {
-                if (ContentOfTalk.Dispatcher.CheckAccess()) {
-
-                    BrushConverter bc = new BrushConverter();
-                    TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
-                    tr.Text = message+'\n';
-
-                    tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(Colors.Blue));
-
-                    ContentOfTalk.ScrollToEnd();
-                } else {
-                    ContentOfTalk.Dispatcher.BeginInvoke(new Action(delegate {
-
-                        
-
-                        BrushConverter bc = new BrushConverter();
-                        TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
-                        tr.Text = message+ '\n';
-
-                        tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(Colors.Blue));
-
-                        ContentOfTalk.ScrollToEnd();
-                    }));
-                }
+                if (ContentOfTalk.Dispatcher.CheckAccess()) SetWordColor(message,false, true);
+                else SetWordColor(message,false, false);
             }
         }
 
@@ -129,6 +120,17 @@ namespace CHATTING_CLIENT {
 
         // 닫기 버튼을 눌렀을때 채팅창을 종료
         private void Close_Window(object sender, MouseButtonEventArgs e) {
+            if (clientSocket != null) {
+                string exitMessage = IP.IPAddress + "님이 나갔습니다.";
+                byte[] buffer = Encoding.Unicode.GetBytes(exitMessage+ "$");
+                stream.Write(buffer, 0, buffer.Length);
+                stream.Flush();
+
+                DisPlayText(SendDataText.Text, false);
+                SendDataText.Text = "";
+                SendDataText.Focus();
+            }
+            clientSocket.Close();
             this.Close();
         }
 
@@ -136,6 +138,8 @@ namespace CHATTING_CLIENT {
         // 이미 최대화일때 다시 보통크키로 만든다.
         private void Maximize_Window(object sender, MouseButtonEventArgs e) {
             this.WindowState = (this.WindowState == WindowState.Normal) ? WindowState.Maximized : WindowState.Normal;
+            ContentOfTalk.Width = 
+            ContentOfTalk.Height = 800;
         }
 
         // 최소화 버튼을 눌렀을때 채팅방을 최소화로 만들어준다.
@@ -143,10 +147,7 @@ namespace CHATTING_CLIENT {
             WindowState = WindowState.Minimized;
         }
 
-        private void SendButtonClick(object sender, MouseButtonEventArgs e) {
-
-        }
-
+        // 기본적인 전송메소드
         private void Send() {
             if (SendDataText.Text != string.Empty) {
                 byte[] buffer = Encoding.Unicode.GetBytes(SendDataText.Text + "$");
@@ -157,18 +158,37 @@ namespace CHATTING_CLIENT {
                 SendDataText.Text = "";
                 SendDataText.Focus();
             }
-            
         }
 
+        // 전송버튼 눌렀을경우 실행
         private void Button_Click(object sender, RoutedEventArgs e) {
             Send();
         }
 
+        // SendDataText의 키보드 다운 이벤트를 분배한다. 
         private void SendDataText_KeyDown(object sender, KeyEventArgs e){
-           
             if (e.Key == Key.Return) Send(); 
             if(e.Key==Key.Back && SendDataText.Text == string.Empty) SendButton.IsEnabled = false;
             else SendButton.IsEnabled = SendDataText.Text == string.Empty ? false : true;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            WindowSystem.originalWidth = this.Width;
+            WindowSystem.originalHeight = this.Height;
+
+            if (this.WindowState == WindowState.Maximized)
+                ChangeSize(this.ActualWidth, this.ActualHeight);
+
+            this.SizeChanged += new SizeChangedEventHandler(Window_SizeChanged);
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
+            ChangeSize(e.NewSize.Width, e.NewSize.Height);
+        }
+
+        private void ChangeSize(double actualWidth, double actualHeight) {
+            WindowSystem.scale.ScaleX = Width / WindowSystem.originalWidth;
+            WindowSystem.scale.ScaleY = Height / WindowSystem.originalHeight;
         }
     }
 }

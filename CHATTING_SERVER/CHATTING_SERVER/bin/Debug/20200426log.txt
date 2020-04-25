@@ -1,0 +1,10 @@
+DateTime : 2020-04-26 오전 2:53:36 User : 192.168.254.1 Message : 192.168.254.1입장하셨습니다.
+DateTime : 2020-04-26 오전 2:53:38 User : 192.168.254.1 Message : 192.168.254.1입장하셨습니다.
+DateTime : 2020-04-26 오전 2:53:42 User : 192.168.254.1 Message : asdasdas
+DateTime : 2020-04-26 오전 2:53:42 User : 192.168.254.1 Message : dasdasdas
+DateTime : 2020-04-26 오전 2:53:43 User : 192.168.254.1 Message : dasdasfdfsd
+DateTime : 2020-04-26 오전 2:53:55 User : 192.168.254.1 Message : 192.168.254.1님이 나갔습니다.
+DateTime : 2020-04-26 오전 2:53:57 User : 192.168.254.1 Message : 192.168.254.1님이 나갔습니다.
+DateTime : 2020-04-26 오전 2:58:06 User : 192.168.254.1 Message : 192.168.254.1입장하셨습니다.
+DateTime : 2020-04-26 오전 2:58:08 User : 192.168.254.1 Message : sdfsdf
+DateTime : 2020-04-26 오전 2:58:10 User : 192.168.254.1 Message : 192.168.254.1님이 나갔습니다.

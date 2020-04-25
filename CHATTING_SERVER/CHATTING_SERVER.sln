@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHATTING_SERVER", "CHATTING_SERVER\CHATTING_SERVER.csproj", "{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHATTING_SERVER", "CHATTING_SERVER\CHATTING_SERVER.csproj", "{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B87EF649-8730-4F4C-A995-2BEC5BB25DC6}
+		SolutionGuid = {7293D6C1-817E-4739-A84F-447DC5D2DCB8}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52F3A50A-78E4-4355-BA52-FFF4461BFE5E}</ProjectGuid>
+    <ProjectGuid>{74DF1005-A4C1-4AAC-A432-4B4DB84082B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CHATTING_SERVER</RootNamespace>
     <AssemblyName>CHATTING_SERVER</AssemblyName>
@@ -46,6 +46,7 @@
     <Compile Include="HandleClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
