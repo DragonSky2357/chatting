@@ -13,11 +13,35 @@
             <Image HorizontalAlignment="Left" Height="20" Margin="360,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Close_Window.png" MouseLeftButtonDown="Close_Window"/>
         </Grid>
         <Grid>
-            <TextBox x:Name="IDText" Text="아이디" HorizontalAlignment="Left" Height="40" Margin="45,70,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
-            <TextBox x:Name="PasswordText" Text="비밀번호" HorizontalAlignment="Left" Height="40" Margin="45,110,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="IDText" Foreground="LightGray" Padding="10" Text="아이디" HorizontalAlignment="Left" Height="40" Margin="45,70,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="PasswordText" Foreground="LightGray" Padding="10" Text="비밀번호" HorizontalAlignment="Left" Height="40" Margin="45,110,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="PasswordCheckText" Foreground="LightGray" Padding="10" Text="비밀번호 재확인" HorizontalAlignment="Left" Height="40" Margin="45,150,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}" KeyDown="PasswordCheckText_KeyDown"/>
             <Image HorizontalAlignment="Left" Height="20" Margin="330,120,0,0" VerticalAlignment="Top" Width="20" Source="./Img/Lock.png"/>
-            <TextBox x:Name="PasswordCheckText" Text="비밀번호 재확인" HorizontalAlignment="Left" Height="40" Margin="45,150,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
-            <Image HorizontalAlignment="Left" Height="20" Margin="330,160,0,0" VerticalAlignment="Top" Width="20" Source="./Img/LockCheck.png"/>
+            <Image x:Name="PasswordReCheck" HorizontalAlignment="Left" Height="20" Margin="365,160,0,0" VerticalAlignment="Top" Width="20"/>
+        </Grid>
+        <Grid>
+            <TextBox x:Name="Name" Foreground="LightGray" Padding="10" Text="이름" HorizontalAlignment="Left" Height="40" Margin="45,205,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+            <Button x:Name="BtnMen" Content="남자" HorizontalAlignment="Left" Margin="45,245,0,0" VerticalAlignment="Top" Width="155" Height="40" BorderBrush="{x:Null}" Background="White" MouseLeftButtonDown="GenderClick"/>
+            <Button x:Name="BtnWomen" Content="여자" HorizontalAlignment="Left" Margin="205,245,0,0" VerticalAlignment="Top" Width="155" Height="40" BorderBrush="{x:Null}" Background="White" MouseLeftButtonDown="GenderClick"/>
+            <DatePicker HorizontalAlignment="Left" Margin="45,285,0,0" VerticalAlignment="Top" Width="315" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <TextBox x:Name="EmergencyEmail" Foreground="LightGray" Padding="10" Text="비상용 이메일" HorizontalAlignment="Left" Height="40" Margin="45,310,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="315" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+        </Grid>
+        <Grid>
+            <ComboBox x:Name="FirstPhoneNumber" HorizontalAlignment="Left" Margin="45,365,0,0" VerticalAlignment="Top" Width="70" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <ComboBoxItem Content="010" Foreground="Black" HorizontalAlignment="Left" Width="94"/>
+                <ComboBoxItem Content="011" Foreground="Black" HorizontalAlignment="Left" Width="94"/>
+                <ComboBoxItem Content="016" Foreground="Black" HorizontalAlignment="Left" Width="94"/>
+                <ComboBoxItem Content="02"  Foreground="Black" HorizontalAlignment="Left" Width="94"/>
+                <ComboBoxItem Content="031" Foreground="Black" HorizontalAlignment="Left" Width="94"/>
+            </ComboBox>
+            <TextBox x:Name="RestPhoneNumber" Foreground="LightGray" Padding="3" Text="휴대전화번호" HorizontalAlignment="Left" Height="23" Margin="120,365,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="240" FontSize="12" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+            <Label Content="[개인정보 수집 이용 동의]" HorizontalAlignment="Left" Margin="45,400,0,0" VerticalAlignment="Top"/>
+            <Label Content="① 개인정보의 수집·이용목적 : 테스트용도, 개발용도 ...&#10;② 수집하려는 개인정보의 항목 : 테스트용도, 개발용도 ...&#10;③ 개인정보의 보유 및 이용기간 : 테스트용도, 개발용도 ...&#10;④ 동의를 거부할 수 있으며, 테스트용도, 개발용도 ...&#10;" HorizontalAlignment="Left" Margin="45,426,0,0" VerticalAlignment="Top" Height="74" Width="337"/>
+            <RadioButton Content="네" HorizontalAlignment="Left" Margin="120,505,0,0" VerticalAlignment="Top"/>
+            <RadioButton Content="아니오" HorizontalAlignment="Left" Margin="205,505,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid>
+            <Button x:Name="BtnSend" Foreground="White" Content="가입하기" HorizontalAlignment="Left" Margin="45,530,0,0" VerticalAlignment="Top" Width="315" Height="40" BorderBrush="{x:Null}" Background="RosyBrown"/>
         </Grid>
     </Grid>
 </Window>

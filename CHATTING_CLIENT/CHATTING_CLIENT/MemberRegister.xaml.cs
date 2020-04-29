@@ -16,7 +16,9 @@ namespace CHATTING_CLIENT {
     /// <summary>
     /// MemberRegister.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MemberRegister : Window {
+    public partial class MemberRegister : Window { 
+        string focusTempText = string.Empty;
+
         public MemberRegister() {
             InitializeComponent();
         }
@@ -39,6 +41,13 @@ namespace CHATTING_CLIENT {
         // 최소화 버튼을 눌렀을때 채팅방을 최소화로 만들어준다.
         private void Minimize_Window(object sender, MouseButtonEventArgs e) {
             WindowState = WindowState.Minimized;
+        }
+
+        private void PasswordCheckText_KeyDown(object sender, KeyEventArgs e) {
+        }
+
+        private void GenderClick(object sender, MouseButtonEventArgs e) {
+
         }
     }
 }
