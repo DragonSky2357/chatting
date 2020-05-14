@@ -59,6 +59,8 @@ namespace CHATTING_CLIENT {
             Thread t_handler = new Thread(GetMessage);
             t_handler.IsBackground = true;
             t_handler.Start();
+
+            SendDataText.Focus();
         }
 
         // 기본적인 수신메소드
@@ -80,11 +82,14 @@ namespace CHATTING_CLIENT {
             BrushConverter bc = new BrushConverter();
             TextRange tr = new TextRange(ContentOfTalk.Document.ContentEnd, ContentOfTalk.Document.ContentEnd);
             tr.Text = message;
-            tr.ApplyPropertyValue(TextElement.ForegroundProperty, bc.ConvertToString(user==true? Colors.Blue:Colors.Black));
+            tr.ApplyPropertyValue(TextElement.BackgroundProperty, bc.ConvertToString(user==true? Colors.Yellow:Colors.White));
 
+            
             ContentOfTalk.AppendText(Environment.NewLine);
             ContentOfTalk.ScrollToEnd();
+            
         }
+
         // user와 UI쓰레드(flag) 접근권한에따라 분배 
         private void SetWordColor (string message,bool user, bool flag) {
             if(user==true && flag == true) {
@@ -170,6 +175,12 @@ namespace CHATTING_CLIENT {
             if (e.Key == Key.Return) Send(); 
             if(e.Key==Key.Back && SendDataText.Text == string.Empty) SendButton.IsEnabled = false;
             else SendButton.IsEnabled = SendDataText.Text == string.Empty ? false : true;
+
+            if(SendDataText.Text.Length >1) {
+                SendDataText.Text += ((SendDataText.Text.Length % 40) == 0) ? Environment.NewLine : "";
+                SendDataText.Select(SendDataText.Text.Length, 0);
+                SendDataText.Focus();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {

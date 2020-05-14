@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CHATTING_CLIENT {
@@ -8,8 +10,17 @@ namespace CHATTING_CLIENT {
     /// Login.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class Login : Window {
+        Dictionary<string, string> loginLinkUrl = new Dictionary<string, string>();
+
         public Login() {
             InitializeComponent();
+            LoginLinkUrlSet();
+        }
+
+        private void LoginLinkUrlSet() {
+            loginLinkUrl.Add("LinkNaverBtn", "https://www.naver.com/");
+            loginLinkUrl.Add("LinkGoogleBtn", "https://www.google.com/");
+            loginLinkUrl.Add("LoginFacebookBtn", "https://www.facebook.com/");
         }
         // 닫기 버튼을 눌렀을때 채팅창을 종료
         private void Close_Window(object sender, MouseButtonEventArgs e) {
@@ -30,7 +41,7 @@ namespace CHATTING_CLIENT {
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
 
             if((this.ID.Text!=string.Empty) && (this.Password.Password!=string.Empty)) {
-                string strConn = String.Format("Data Source={0}", AppDomain.CurrentDomain.BaseDirectory + @"database\Chatting.db");
+                string strConn = String.Format("Data Source={0}", AppDomain.CurrentDomain.BaseDirectory + @"\DB\ChattingDB.db");
 
                 using (SQLiteConnection conn = new SQLiteConnection(strConn)) {
                     conn.Open();
@@ -52,6 +63,9 @@ namespace CHATTING_CLIENT {
                             var pw = rdr["UserPassword"];
                         }
                         MessageBox.Show("Sucess", "asd", MessageBoxButton.OK);
+                        Window chattingWindow = new MainWindow();
+                        chattingWindow.Show();
+                        this.Close();
                     }
 
                     
@@ -80,6 +94,13 @@ namespace CHATTING_CLIENT {
 
         private void MembeRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             new MemberRegister().Show();
+        }
+
+        private void LoginLink_Click(object sender, RoutedEventArgs e) {
+            var linkButton = sender as Button;
+            string linkUrl = loginLinkUrl[linkButton.Name];
+
+            System.Diagnostics.Process.Start(linkUrl);
         }
     }
 }

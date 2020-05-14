@@ -70,3 +70,11 @@ C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\t
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\obj\Debug\CHATTING_CLIENT.exe.licenses
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Controls.Data.dll
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Controls.Data.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Controls.FixedDocumentViewers.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Documents.Core.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Documents.Fixed.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Zip.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Controls.FixedDocumentViewers.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Documents.Core.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Documents.Fixed.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_CLIENT\CHATTING_CLIENT\bin\Debug\Telerik.Windows.Zip.xml

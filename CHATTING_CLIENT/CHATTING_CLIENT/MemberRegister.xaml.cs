@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace CHATTING_CLIENT {
     /// </summary>
     public partial class MemberRegister : Window { 
         string focusTempText = string.Empty;
+        bool genderMen = true;
 
         public MemberRegister() {
             InitializeComponent();
@@ -43,11 +45,103 @@ namespace CHATTING_CLIENT {
             WindowState = WindowState.Minimized;
         }
 
-        private void PasswordCheckText_KeyDown(object sender, KeyEventArgs e) {
+        private void GenderClick(object sender, RoutedEventArgs e) {
+            var gender = sender as Button;
+
+            if(gender.Name == "BtnMen") {
+                BtnMen.Background = Brushes.GreenYellow;
+                BtnWomen.Background = Brushes.White;
+                genderMen = true;
+            } else {
+                BtnMen.Background = Brushes.White;
+                BtnWomen.Background = Brushes.GreenYellow;
+                genderMen = false;
+            }
+            
         }
 
-        private void GenderClick(object sender, MouseButtonEventArgs e) {
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) {
+            var textBox = sender as TextBox;
+            textBox.Text = "";
+        }
+
+        private bool EmptyUserInfo() {
+            if (string.IsNullOrEmpty(IDText.Text.ToString()) ||
+                string.IsNullOrEmpty(PasswordText.Password.ToString()) ||
+                string.IsNullOrEmpty(PasswordCheckText.Password.ToString()) ||
+                string.IsNullOrEmpty(NameText.Text.ToString()) ||
+                string.IsNullOrEmpty(BirthDay.SelectedDate.ToString()) ||
+                string.IsNullOrEmpty(EmergencyEmail.Text.ToString()) ||
+                string.IsNullOrEmpty(SecondPhoneNumber.Text.ToString()) ||
+                string.IsNullOrEmpty(SecondPhoneNumber.Text.ToString()) ||
+                string.IsNullOrEmpty(ThirdPhoneNumber.Text.ToString())) {
+                MessageBox.Show("비어있는 정보가 있습니다. 확인해 주세요");
+                return true;
+            }
+                
+
+            return false;
 
         }
+        private void BtnSend_Click(object sender, RoutedEventArgs e) {
+
+            if (RadioBtnYes.IsChecked == false) {
+                MessageBox.Show("개인 정보 수집 이용 동의하지 않으시면 가입을 하실 수 없습니다. ");
+                return;
+            }
+            if (EmptyUserInfo()) return;
+
+            string strConn = String.Format("Data Source={0}", AppDomain.CurrentDomain.BaseDirectory + @"\DB\ChattingDB.db");
+
+            using (SQLiteConnection conn = new SQLiteConnection(strConn)) {
+                conn.Open();
+                //string sql = "INSERT INTO User(USERID,USERPASSWORD) VALUES('test','1234')";
+                //SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                //cmd.ExecuteNonQuery();
+                string userID = IDText.Text.ToString();
+                string userPassword = PasswordText.Password.ToString();
+                string userName = NameText.Text.ToString();
+                string userGender = genderMen == true ? "남" : "여";
+                string userBirthDay = BirthDay.SelectedDate.ToString();
+                string userEmergencyEmail = EmergencyEmail.Text.ToString();
+                string userPhoneNumber = FirstPhoneNumber.ToString()+SecondPhoneNumber.Text.ToString()+ThirdPhoneNumber.Text.ToString();
+                string makeTime = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+
+                string sql = string.Format($"INSERT INTO User (UserID,UserPassword,Name,Gender,BirthDay," +
+                    $"PhoneNumber,EmergencyEmail,MakeTime) VALUES" +
+                    $"(\"{userID}\",\"{userPassword}\",\"{userName}\",\"{userGender}\"," +
+                    $"\"{userBirthDay}\",\"{userEmergencyEmail}\",\"{userPhoneNumber}\",\"{makeTime}\")");
+
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                //SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                /*
+                if (rdr.HasRows) {
+                    while (rdr.Read()) {
+                        var id = rdr["UserID"];
+                        var pw = rdr["UserPassword"];
+                    }
+                    MessageBox.Show("Sucess", "asd", MessageBoxButton.OK);
+                }
+                */
+
+
+                //cmd.CommandText = "DELETE FROM User WHERE Id=2";
+                //cmd.ExecuteNonQuery();
+
+                conn.Close();
+            }
+        }
+
+        private void PasswordChangedCheck(object sender, RoutedEventArgs e) {
+            if ((PasswordText.Password.Equals(PasswordCheckText.Password)))
+                PasswordReCheckUI.Visibility = Visibility.Visible;
+            else
+                PasswordReCheckUI.Visibility = Visibility.Hidden;
+        }
+
     }
 }

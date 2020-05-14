@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CHATTING_CLIENT"
         mc:Ignorable="d"
-        Title="Login" Height="600" Width="400" WindowStyle="None" MouseLeftButtonDown="ScreenMove">
+        Title="Login" Height="600" Width="400" WindowStyle="None" MouseLeftButtonDown="ScreenMove" ResizeMode="NoResize">
 
     <Grid Background="#FFFFEB33">
         <Grid>
@@ -16,13 +16,17 @@
         <Grid>
             <TextBox x:Name="ID"  HorizontalAlignment="Left" Height="50" Margin="80,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" BorderBrush="Black" Background="Transparent" FontSize="30" BorderThickness="0,0,0,3"/>
             <PasswordBox x:Name="Password" HorizontalAlignment="Left" Height="50" Margin="80,300,0,0"  VerticalAlignment="Top" Width="235" BorderBrush="Black" FontSize="30" Background="Transparent" BorderThickness="0,0,0,3"/>
-            <Button x:Name="LoginButton" HorizontalAlignment="Center"  Background="LightGray"  Height="50" Margin="80,360,77,0" VerticalAlignment="Top" Width="235" Click="LoginButton_Click"/>
+            <Button x:Name="LoginButton"  HorizontalAlignment="Center"  Background="LightGray"  Height="50" Margin="80,360,77,0" VerticalAlignment="Top" Width="235" Click="LoginButton_Click"/>
+            <Button x:Name="LinkNaverBtn" Content="   Naver 계정으로 로그인 하기" Foreground="White" HorizontalAlignment="Center"  Background="#07A500"  Height="30" Margin="84,445,81,0" VerticalAlignment="Top" Width="235" BorderBrush="{x:Null}" Click="LoginLink_Click"/>
+            <Button x:Name="LinkGoogleBtn" Content="   Google 계정으로 로그인 하기" Foreground="White" HorizontalAlignment="Center"  Background="#4285F4"  Height="30" Margin="84,480,81,0" VerticalAlignment="Top" Width="235" BorderBrush="{x:Null}" Click="LoginLink_Click"/>
+            <Button x:Name="LoginFacebookBtn" Content="   Facebook 계정으로 로그인 하기" Foreground="White" HorizontalAlignment="Center"  Background="#3B5998"  Height="30" Margin="84,515,81,0" VerticalAlignment="Top" Width="235"  BorderBrush="{x:Null}" Click="LoginLink_Click"/>
         </Grid>
         <Grid>
             <Image HorizontalAlignment="Left" Height="125" Margin="130,105,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="1.833,-2.667" Source="./Img/MessageIcon.png"/>
-            <Label x:Name="IDFind" Content="아이디찾기" HorizontalAlignment="Left" Margin="76,540,0,0" VerticalAlignment="Top" MouseLeftButtonDown="IDFind_MouseLeftButtonDown"/>
-            <Label x:Name="PasswordFind" Content="비밀번호 찾기" HorizontalAlignment="Left" Margin="160,540,0,0" VerticalAlignment="Top" MouseLeftButtonDown="PasswordFind_MouseLeftButtonDown"/>
-            <Label x:Name="MembeRegister" Content="회원가입" HorizontalAlignment="Left" Margin="262,540,0,0" VerticalAlignment="Top" MouseLeftButtonDown="MembeRegister_MouseLeftButtonDown"/>
+            <Label x:Name="IDFind" Content="아이디찾기" HorizontalAlignment="Left" Margin="79,550,0,0" VerticalAlignment="Top" MouseLeftButtonDown="IDFind_MouseLeftButtonDown"/>
+            <Label x:Name="PasswordFind" Content="비밀번호 찾기" HorizontalAlignment="Left" Margin="163,550,0,0" VerticalAlignment="Top" MouseLeftButtonDown="PasswordFind_MouseLeftButtonDown"/>
+            <Label x:Name="MembeRegister" Content="회원가입" HorizontalAlignment="Left" Margin="265,550,0,0" VerticalAlignment="Top" MouseLeftButtonDown="MembeRegister_MouseLeftButtonDown"/>
+
         </Grid>
     </Grid>
 </Window>
