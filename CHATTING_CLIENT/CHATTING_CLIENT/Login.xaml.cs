@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CHATTING_CLIENT {
     /// <summary>
     /// Login.xaml에 대한 상호 작용 논리
     /// </summary>
+
     public partial class Login : Window {
         Dictionary<string, string> loginLinkUrl = new Dictionary<string, string>();
 
@@ -39,61 +46,69 @@ namespace CHATTING_CLIENT {
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
+            ClientSocket cs = new ClientSocket(13000);
 
-            if((this.ID.Text!=string.Empty) && (this.Password.Password!=string.Empty)) {
-                string strConn = String.Format("Data Source={0}", AppDomain.CurrentDomain.BaseDirectory + @"\DB\ChattingDB.db");
+            byte[] buffer = Encoding.Unicode.GetBytes(Command.LoginButtonClick+'\0');
+            cs.stream.Write(buffer, 0, buffer.Length);
+            cs.stream.Flush();
 
-                using (SQLiteConnection conn = new SQLiteConnection(strConn)) {
-                    conn.Open();
+            UserLogin userLogin = new UserLogin();
+            userLogin.UserID = ID.Text.ToString();
+            userLogin.UserPassword = Password.Password.ToString();
 
-                    //string sql = "INSERT INTO User(USERID,USERPASSWORD) VALUES('test','1234')";
-                    //SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                    //cmd.ExecuteNonQuery();
-                    string userID = this.ID.Text;
-                    string userPassword = this.Password.Password;
+            byte[] userBuffer = GetBytes_Bind(userLogin);
+            cs.stream.Write(userBuffer, 0, userBuffer.Length);
 
-                    string sql = string.Format("SELECT * FROM User WHERE UserID='{0}'", userID);
+            byte[] endMessage = Encoding.Unicode.GetBytes("<EndMessage>");
+            cs.stream.Write(endMessage, 0, endMessage.Length);
 
-                    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                    SQLiteDataReader rdr = cmd.ExecuteReader();
+            byte[] loginCheck = new byte[1024];
+            cs.stream = cs.clientSocket.GetStream();
+            int bytes = cs.stream.Read(loginCheck, 0, loginCheck.Length);
+            string command = Encoding.Unicode.GetString(loginCheck, 0, loginCheck.Length);
+            command = command.Substring(0, command.IndexOf("\0"));
+            cs.stream.Close();
 
-                    if (rdr.HasRows) {
-                        while (rdr.Read()) {
-                            var id = rdr["UserID"];
-                            var pw = rdr["UserPassword"];
-                        }
-                        MessageBox.Show("Sucess", "asd", MessageBoxButton.OK);
-                        Window chattingWindow = new MainWindow();
-                        chattingWindow.Show();
-                        this.Close();
-                    }
-
-                    
-
-                    //cmd.CommandText = "DELETE FROM User WHERE Id=2";
-                    //cmd.ExecuteNonQuery();
-
-                    conn.Close();
-                }
-               
+            if (command == "TRUE") {
+                new ChattingRoom("").Show();
+                this.Close();
+            } else if (command == "ALREADY") {
+                //new ChattingRoom("").Show();
+                this.Close();
+                LoginFailed.Content = "이미 로그인된 아이디 입니다.";
+                LoginFailed.Visibility = Visibility.Visible;
+            } else if (command == "FALSE") {
+                LoginFailed.Content = "계정 또는 비밀번호를 다시 확인해 주세요.";
+                LoginFailed.Visibility = Visibility.Visible;
             }
-            
+
+        }
+        private byte[] GetBytes_Bind(UserLogin data) {
+            byte[] buffer = new byte[UserLogin.SIZE];
+
+            MemoryStream ms = new MemoryStream(buffer, true);
+            BinaryWriter bw = new BinaryWriter(ms);
+
+            try {
+                byte[] byteID = new byte[20];
+                Encoding.UTF8.GetBytes(data.UserID, 0, data.UserID.Length, byteID, 0);
+                bw.Write(byteID);
+
+                byte[] bytePassword = new byte[20];
+                Encoding.UTF8.GetBytes(data.UserPassword, 0, data.UserPassword.Length, bytePassword, 0);
+                bw.Write(bytePassword);
+            } catch (Exception e) {
+                Trace.WriteLine("{0}", e.Message);
+            }
+
+            bw.Close();
+            ms.Close();
+
+            return buffer;
         }
 
         private void ScreenMove(object sender, MouseButtonEventArgs e) {
             this.DragMove();
-        }
-
-        private void IDFind_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-
-        }
-
-        private void PasswordFind_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-
-        }
-
-        private void MembeRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            new MemberRegister().Show();
         }
 
         private void LoginLink_Click(object sender, RoutedEventArgs e) {
@@ -101,6 +116,47 @@ namespace CHATTING_CLIENT {
             string linkUrl = loginLinkUrl[linkButton.Name];
 
             System.Diagnostics.Process.Start(linkUrl);
+        }
+
+        private void IDTextBox_GotFocus(object sender, RoutedEventArgs e) {
+            LabelID.Visibility = Visibility.Hidden;
+            ID.Foreground = System.Windows.Media.Brushes.Black;
+        }
+
+        private void PasswordBox_GotFocus(object sender, RoutedEventArgs e) {
+            LabelPassword.Visibility = Visibility.Hidden;
+            Password.Foreground = System.Windows.Media.Brushes.Black;
+        }
+
+        private void ID_TextChanged(object sender, TextChangedEventArgs e) {
+            ChnageLoginButton();
+
+        }
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e) {
+            ChnageLoginButton();
+        }
+        private void ChnageLoginButton() {
+            if (ID.Text.Length != 0 && Password.Password.Length >= 4) {
+                LoginButton.Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#594941");
+                LoginButton.Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#FFFFFF");
+                LoginButton.IsEnabled = true;
+            } else {
+                LoginButton.Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#F6F6F6");
+                LoginButton.Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#808080");
+                LoginButton.IsEnabled = false;
+            }
+        }
+
+        private void ID_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Return) LoginButton_Click(null, null);
+        }
+
+        private void Password_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Return) LoginButton_Click(null, null);
+        }
+
+        private void MembeRegister_Click(object sender, RoutedEventArgs e) {
+            new UserRegister().Show();
         }
     }
 }

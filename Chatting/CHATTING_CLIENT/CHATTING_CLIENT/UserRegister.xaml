@@ -1,0 +1,43 @@
+﻿<Window x:Class="CHATTING_CLIENT.UserRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CHATTING_CLIENT"
+        mc:Ignorable="d"
+        Title="회원가입" Height="600" Width="400" WindowStyle="None" MouseLeftButtonDown="ScreenMove" ResizeMode="NoResize" Topmost="True">
+    <Grid Background="#FFFFEB33" x:Name="test">
+        <Grid>
+            <Image HorizontalAlignment="Left" Height="20" Margin="300,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Minimize_Window.png" MouseLeftButtonDown="Minimize_Window"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="330,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Maximize_Window.png" MouseLeftButtonDown="Maximize_Window"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="360,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Close_Window.png" MouseLeftButtonDown="Close_Window"/>
+        </Grid>
+        <Grid>
+            <TextBox x:Name="IDText"  Padding="10" Text="아이디" HorizontalAlignment="Left" Height="40" Margin="37,70,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="323" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+            <PasswordBox x:Name="PasswordText" Padding="10" HorizontalAlignment="Left" Height="40" Margin="37,110,0,0"  VerticalAlignment="Top" Width="323" VerticalContentAlignment="Center" BorderBrush="{x:Null}" PasswordChanged="PasswordChangedCheck"/>
+            <PasswordBox x:Name="PasswordCheckText"  Padding="10" HorizontalAlignment="Left" Height="40" Margin="37,150,0,0"  VerticalAlignment="Top" Width="323" VerticalContentAlignment="Center" BorderBrush="{x:Null}" PasswordChanged="PasswordChangedCheck"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="330,120,0,0" VerticalAlignment="Top" Width="20" Source="./Img/Lock.png"/>
+            <Image x:Name="PasswordReCheckUI" HorizontalAlignment="Left" Height="20" Margin="365,160,0,0" VerticalAlignment="Top" Width="20" Source="./Img/UnChecked.png" Visibility="Hidden"/>
+        </Grid>
+        <Grid>
+            <TextBox x:Name="NameText" Padding="10" Text="이름" HorizontalAlignment="Left" Height="40" Margin="37,205,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="323" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+            <Button x:Name="BtnMen"  Content="남자" HorizontalAlignment="Left" Margin="37,245,0,0" VerticalAlignment="Top" Width="159" Height="40" BorderBrush="{x:Null}" Background="GreenYellow" Click="GenderClick"/>
+            <Button x:Name="BtnWomen" Content="여자" HorizontalAlignment="Left" Margin="201,245,0,0" VerticalAlignment="Top" Width="159" Height="40" BorderBrush="{x:Null}" Background="White" Click="GenderClick"/>
+            <DatePicker x:Name="BirthDay" HorizontalAlignment="Left" Margin="37,285,0,0" VerticalAlignment="Top" Width="323" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <TextBox x:Name="EmergencyEmail" Foreground="LightGray" Padding="10" Text="비상용이메일" HorizontalAlignment="Left" Height="40" Margin="37,310,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="323" FontSize="16" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+        </Grid>
+        <Grid>
+            <TextBox x:Name="FirstPhoneNumber" Foreground="LightGray" Padding="3" Text="휴대전화번호" HorizontalAlignment="Left" Height="23" Margin="125,365,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="115" FontSize="12" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+            <Label Content="[개인정보 수집 이용 동의]" HorizontalAlignment="Left" Margin="37,400,0,0" VerticalAlignment="Top"/>
+            <Label Content="① 개인정보의 수집·이용목적 : 테스트용도, 개발용도 ...&#10;② 수집하려는 개인정보의 항목 : 테스트용도, 개발용도 ...&#10;③ 개인정보의 보유 및 이용기간 : 테스트용도, 개발용도 ...&#10;④ 동의를 거부할 수 있으며, 테스트용도, 개발용도 ...&#10;" HorizontalAlignment="Left" Margin="37,426,0,0" VerticalAlignment="Top" Height="74" Width="337"/>
+            <RadioButton x:Name="RadioBtnYes" Content="네" HorizontalAlignment="Left" Margin="125,505,0,0" VerticalAlignment="Top"/>
+            <RadioButton Content="아니오" HorizontalAlignment="Left" Margin="210,505,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="SecondPhoneNumber" Foreground="LightGray" Padding="3" Text="휴대전화번호" HorizontalAlignment="Left" Height="23" Margin="37,365,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="83" FontSize="12" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+            <TextBox x:Name="ThirdPhoneNumber" Foreground="LightGray" Padding="3" Text="휴대전화번호" HorizontalAlignment="Left" Height="23" Margin="245,365,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="115" FontSize="12" VerticalContentAlignment="Center" BorderBrush="{x:Null}" GotFocus="TextBox_GotFocus"/>
+           
+        </Grid>
+        <Grid>
+            <Button x:Name="BtnSend" Foreground="White" Content="가입하기" HorizontalAlignment="Left" Margin="40,530,0,0" VerticalAlignment="Top" Width="315" Height="40" BorderBrush="{x:Null}" Background="RosyBrown" Click="BtnSend_Click"/>
+        </Grid>
+    </Grid>
+</Window>

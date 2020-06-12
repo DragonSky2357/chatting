@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -31,10 +32,8 @@ namespace CHATTING_SERVER {
                 byte[] buffer = new byte[1024];
                 string msg = string.Empty;
                 int bytes = 0;
-                int MessageCount = 0;
 
                 while (true) {
-                    MessageCount++;
                     stream = clientSocket.GetStream();
                     bytes = stream.Read(buffer, 0, buffer.Length);
                     msg = Encoding.Unicode.GetString(buffer, 0, bytes);
@@ -50,8 +49,11 @@ namespace CHATTING_SERVER {
                     if (OnDisconnected != null)
                         OnDisconnected(clientSocket);
 
-                    clientSocket.Close();
-                    stream.Close();
+                    if (clientSocket != null)
+                        clientSocket.Close();
+
+                    if (stream != null)
+                        stream.Close();
                 }
             } catch (Exception ex) {
                 Trace.WriteLine(string.Format("doChat - Exception : {0}", ex.Message));
@@ -60,8 +62,11 @@ namespace CHATTING_SERVER {
                     if (OnDisconnected != null)
                         OnDisconnected(clientSocket);
 
-                    clientSocket.Close();
-                    stream.Close();
+                    if(clientSocket!=null)
+                        clientSocket.Close();
+
+                    if(stream!=null)
+                        stream.Close();
                 }
             }
         }

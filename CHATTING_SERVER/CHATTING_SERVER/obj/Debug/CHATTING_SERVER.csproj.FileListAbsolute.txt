@@ -10,3 +10,13 @@ C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\C
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\obj\Debug\CHATTING_SERVER.csprojAssemblyReference.cache
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\obj\Debug\CHATTING_SERVER.exe
 C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\obj\Debug\CHATTING_SERVER.pdb
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\EntityFramework.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\System.Data.SQLite.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\EntityFramework.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\System.Data.SQLite.xml
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\qkrdy\source\repos\Chatting\CHATTING_SERVER\CHATTING_SERVER\obj\Debug\CHATTING_SERVER.csproj.CopyComplete

@@ -1,0 +1,22 @@
+﻿<Window x:Class="CHATTING_CLIENT.ChattingRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CHATTING_CLIENT"
+        mc:Ignorable="d" Height="600" Width="400" WindowStyle="None" AllowsTransparency="True" MouseLeftButtonDown="ScreenMove" Foreground="{x:Null}" Loaded="Window_Loaded" Title="Chatting" Background="#A9BDCE">
+    <Grid>
+        <Grid>
+            <Image HorizontalAlignment="Left" Height="20" Margin="345,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Minimize_Window.png" MouseLeftButtonDown="Minimize_Window"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="370,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="1.833,-2.667" Source="./Img/Close_Window.png" MouseLeftButtonDown="Close_Window"/>
+        </Grid>
+        <Grid>
+            <RichTextBox x:Name="ContentOfTalk" FontSize="15" IsReadOnly="True"  Background="#B2C7D9" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="400" SelectionBrush="White" Margin="0,55,0,0" FontWeight="Bold"></RichTextBox>
+        </Grid>
+        <Grid>
+            <TextBox x:Name="SendDataText" MinLines="1" MaxLines="5" MaxLength="500" HorizontalAlignment="Left" Height="95" Margin="0,505,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="400" FontSize="14" BorderBrush="White" SelectionBrush="White" SelectionOpacity="1" 
+                     AcceptsTab="True" KeyDown="SendDataText_KeyDown"/>
+            <Button x:Name="SendButton" IsEnabled="False" HorizontalAlignment="Left" Height="30" Width="60" Margin="330,520,0,50" Content="전송" Background="Yellow" VerticalAlignment="Top" RenderTransformOrigin="1.833,-2.667"  BorderBrush="#FFF0F052" Click="Button_Click"/>
+        </Grid>
+    </Grid>
+</Window>
